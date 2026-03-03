@@ -4,6 +4,7 @@ import com.example.demo.Employee;
 import com.example.demo.Status;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
@@ -28,6 +29,16 @@ public class EmployeeController {
     public List<Employee> getAllDoctors() {
 
         return new ArrayList<>(doctors.values());
+    }
+    @GetMapping("/doctors/status")
+    public List<Employee> getDoctorsByStatus(@RequestParam Status status){
+        ArrayList<Employee> employeesByStatus = new ArrayList<>();
+        for(Employee e: doctors.values()){
+            if(e.getStatus()==status){
+                employeesByStatus.add(e);
+            }
+        }
+        return  employeesByStatus;
     }
     @GetMapping("/doctors/id/{employee_id}")
     public Employee getDoctorById(@PathVariable int employee_id){
