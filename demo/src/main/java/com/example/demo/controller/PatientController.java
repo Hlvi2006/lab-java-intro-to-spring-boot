@@ -73,14 +73,14 @@ public class PatientController {
         return  patientsByDoctorsDepartment;
     }
 
-    @GetMapping("/patients/doctors_status/{status}")
-    public List<Patient> getPatientsByDoctorsStatus(@PathVariable Status status){
+    @GetMapping("/patients/doctors_status/OFF")
+    public List<Patient> getPatientsByDoctorsStatus(){
 
         ArrayList<Employee> doctorStatusOff=new ArrayList<>();
         ArrayList<Patient> patientsWithDoctorStatusOff=new ArrayList<>();
 
         for(Employee doctor:doctors.values()){
-            if(doctor.getStatus()==status){
+            if(doctor.getStatus()==Status.OFF){
                 doctorStatusOff.add(doctor);
             }
         }
